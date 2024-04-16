@@ -1,9 +1,9 @@
-import './App.css';
-import EmailInput from './components/EmailInput';
-import LetterDisplay from './components/LetterDisplay';
-import PromptInput from './components/PromptInput';
-import SongDisplay from './components/SongDisplay';
-import Title from './components/Title';
+import "./App.css";
+import EmailInput from "./components/EmailInput";
+import LetterDisplay from "./components/LetterDisplay";
+import PromptInput from "./components/PromptInput";
+import SongDisplay from "./components/SongDisplay";
+import Title from "./components/Title";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Title />
       <PromptInput />
       <LetterDisplay />
-      <EmailInput/>
+      <EmailInput />
       <SongDisplay />
     </div>
   );
