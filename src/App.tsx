@@ -13,7 +13,7 @@ function App() {
     <div className="min-h-screen bg-[#0096FF] flex justify-center flex-col">
       <Title />
       <PromptInput setLyrics={setLyrics} />
-      <LetterDisplay lyrics={lyrics} />
+      <LetterDisplay lyrics={lyrics} onRegenerate={() => {}} />
       <EmailInput />
       <SongDisplay />
     </div>
