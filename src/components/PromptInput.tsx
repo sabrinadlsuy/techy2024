@@ -4,9 +4,12 @@ import { useState } from "react";
 import OpenAI from "openai";
 import React from "react";
 
-const PromptInput = () => {
+interface PromptInputProps {
+  setLyrics: (lyrics: string) => void;
+}
+
+const PromptInput: React.FC<PromptInputProps> = ({ setLyrics }) => {
   const [text, setText] = useState("");
-  const [lyrics, setLyrics] = useState("");
 
   const handleTextChange = (e: any) => {
     setText(e.target.value);
@@ -16,7 +19,7 @@ const PromptInput = () => {
     console.log("Submitted:", text);
 
     const openai = new OpenAI({
-      apiKey: process.env.REACT_APP_OPENAI_API_KEY, // This is also the default, can be omitted
+      apiKey: process.env.REACT_APP_OPENAI_API_KEY,
       dangerouslyAllowBrowser: true,
     });
 
@@ -36,9 +39,7 @@ const PromptInput = () => {
         temperature: 0.8,
       });
 
-      const generatedLyrics = JSON.stringify(
-        response.choices[0].message.content?.trim()
-      );
+      const generatedLyrics = response.choices[0].message.content?.trim() || "";
       setLyrics(generatedLyrics);
     } catch (error) {
       console.error("Error generating lyrics:", error);
@@ -80,14 +81,6 @@ const PromptInput = () => {
               Generar letra
             </Button>
           </div>
-          <p>
-            {lyrics.split("\\n").map((line, index) => (
-              <React.Fragment key={index}>
-                {line}
-                <br />
-              </React.Fragment>
-            ))}
-          </p>
         </div>
       </div>
     </>

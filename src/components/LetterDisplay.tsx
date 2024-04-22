@@ -1,7 +1,12 @@
 import { ReloadOutlined } from "@ant-design/icons";
 import { Button, Card } from "antd";
+import React from "react";
 
-const LetterDisplay = () => {
+interface LetterDisplayProps {
+  lyrics: string;
+}
+
+const LetterDisplay: React.FC<LetterDisplayProps> = ({ lyrics }) => {
   return (
     <div className="w-1/2 mx-auto">
       <div className="bg-white mt-5 shadow-lg p-8">
@@ -12,22 +17,26 @@ const LetterDisplay = () => {
               className="uppercase"
               icon={<ReloadOutlined />}
               type="primary"
-              onClick={() => {}}
             >
               Regenerar
             </Button>
           </div>
         </div>
         <div className="mb-4">
-          <Card>lorem..</Card>
+          <Card>
+            <p>
+              {lyrics.split("\n").map((line, index) => (
+                <React.Fragment key={index}>
+                  {line}
+                  <br />
+                </React.Fragment>
+              ))}
+            </p>
+          </Card>
         </div>
         <div className="text-center">
           <p className="mb-4">¿Te gustó la letra?</p>
-          <Button
-            className="uppercase bg-green-500"
-            type="primary"
-            onClick={() => {}}
-          >
+          <Button className="uppercase bg-green-500" type="primary">
             Generar melodía
           </Button>
         </div>

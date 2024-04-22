@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import EmailInput from "./components/EmailInput";
 import LetterDisplay from "./components/LetterDisplay";
@@ -6,11 +7,13 @@ import SongDisplay from "./components/SongDisplay";
 import Title from "./components/Title";
 
 function App() {
+  const [lyrics, setLyrics] = useState<string>("");
+
   return (
     <div className="min-h-screen bg-[#0096FF] flex justify-center flex-col">
       <Title />
-      <PromptInput />
-      <LetterDisplay />
+      <PromptInput setLyrics={setLyrics} />
+      <LetterDisplay lyrics={lyrics} />
       <EmailInput />
       <SongDisplay />
     </div>
