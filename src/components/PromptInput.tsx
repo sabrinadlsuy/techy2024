@@ -29,10 +29,10 @@ const PromptInput: React.FC<PromptInputProps> = ({ setLyrics, setLoading }) => {
         model: "gpt-3.5-turbo",
         messages: [
           {
-            content: "Sos un robot que genera letras de canciones",
+            content: "Sos un robot que genera recetas de cocina",
             role: "system",
           },
-          { content: `Generar canciones acerca de: ${text}`, role: "user" },
+          { content: `Generar recetas acerca de: ${text}`, role: "user" },
         ],
         max_tokens: 500,
         n: 1,
