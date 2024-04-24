@@ -32,7 +32,10 @@ const PromptInput: React.FC<PromptInputProps> = ({ setLyrics, setLoading }) => {
             content: "Sos un robot que genera recetas de cocina",
             role: "system",
           },
-          { content: `Generar recetas acerca de: ${text}`, role: "user" },
+          {
+            content: `Generar recetas de cocina acerca de: ${text}`,
+            role: "user",
+          },
         ],
         max_tokens: 500,
         n: 1,

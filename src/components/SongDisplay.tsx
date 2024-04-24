@@ -9,6 +9,7 @@ interface SongDisplayProps {
   cover: string;
   mp3_url: string;
   audio_url: string;
+  titulo: string;
   showSong: boolean;
 }
 
@@ -18,6 +19,7 @@ const SongDisplay: React.FC<SongDisplayProps> = ({
   mp3_url,
   audio_url,
   showSong,
+  titulo
 }) => {
 
   useEffect(() => emailjs.init(process.env.REACT_APP_EMAILJS_KEY ?? '6DPLoUxaLqR_Y5lsi'), []);
@@ -28,14 +30,12 @@ const SongDisplay: React.FC<SongDisplayProps> = ({
  
     const serviceId = "service_qup7err";
     const templateId = "template_4nbk34k";
-    //const api_url = process.env.REACT_APP_SUNO_API_URL ?? 'https://suno-api-mauve-omega.vercel.app';
-    //const song = api_url + mp3_url;
-    const song = mp3_url;
 
     try {
       await emailjs.send(serviceId, templateId, {
         portada: cover,
-        cancion: song,
+        cancion: mp3_url,
+        titulo: titulo,
         bcc: emails,
       });
       setShowSent(true);
@@ -47,7 +47,6 @@ const SongDisplay: React.FC<SongDisplayProps> = ({
     setTimeout(() => {
       setShowSent(false);
      }, 5000);
-
   };
 
   return (
