@@ -6,9 +6,10 @@ import React from "react";
 
 interface PromptInputProps {
   setLyrics: (lyrics: string) => void;
+  setLoading: (loading: boolean) => void;
 }
 
-const PromptInput: React.FC<PromptInputProps> = ({ setLyrics }) => {
+const PromptInput: React.FC<PromptInputProps> = ({ setLyrics, setLoading }) => {
   const [text, setText] = useState("");
 
   const handleTextChange = (e: any) => {
@@ -16,7 +17,7 @@ const PromptInput: React.FC<PromptInputProps> = ({ setLyrics }) => {
   };
 
   const handleSubmit = async () => {
-    console.log("Submitted:", text);
+    setLoading(true);
 
     const openai = new OpenAI({
       apiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -43,7 +44,9 @@ const PromptInput: React.FC<PromptInputProps> = ({ setLyrics }) => {
       setLyrics(generatedLyrics);
     } catch (error) {
       console.error("Error generating lyrics:", error);
-    }
+    } finally {
+      setLoading(false);
+    } 
   };
 
   return (
@@ -57,7 +60,7 @@ const PromptInput: React.FC<PromptInputProps> = ({ setLyrics }) => {
                 ¿De qué quieres que sea tu canción?
               </label>
               <Button
-                className="uppercase rounded-none mb-4"
+                className="uppercase rounded-none mb-4 hidden"
                 type="primary"
                 onClick={handleSubmit}
                 icon={<HighlightOutlined />}
@@ -70,6 +73,8 @@ const PromptInput: React.FC<PromptInputProps> = ({ setLyrics }) => {
               value={text}
               onChange={handleTextChange}
               placeholder="Quiero una canción que hable de..."
+              required={true}
+              id="prompt"
             />
           </div>
           <div className="text-center">
